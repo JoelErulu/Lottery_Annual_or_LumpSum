@@ -1,0 +1,49 @@
+package test;
+
+import java.util.*;
+
+public class Project_Lottery {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		double amtLump, pmt, r, n;
+
+		System.out.print("Lump Sum Amount: ");
+		amtLump = input.nextDouble();
+
+		System.out.print("Annual payment, interest, and number of payments: ");
+		pmt = input.nextDouble();
+		r = input.nextDouble();
+		n = input.nextDouble();
+
+		System.out.println("------ |Results| ---------");
+
+		System.out.println("");
+		System.out.println("--- |Option 1| ---");
+		System.out.printf("Lump sum Value: %,.2f \n", amtLump);
+
+
+		System.out.println("");
+		System.out.println("--- |Option 2| ---");
+		System.out.printf("Payment Amount: %,.2f \n", pmt);
+		System.out.printf("Annual Interest rate:  %.2f%% \n", r*100);
+		System.out.printf("Number Of Payments: %.0f \n", n);
+		System.out.printf("Annual Payments today's value: %,.2f \n", calcPV(pmt, r, n));
+
+		System.out.println("");
+		System.out.println("--- |Analysis| ---");
+
+		if(amtLump > calcPV(pmt, r, n))
+			System.out.println("You are better off with Lump Sum");
+		else
+			System.out.println("You are better off with Annual Payments.");
+
+	}
+	public static double calcPV( double pmt, double r, double n) {
+		double pv;
+
+		pv = pmt*((1/r) - 1/(r*Math.pow((1 + r),n*1)));
+
+		return pv;
+	}
+}
